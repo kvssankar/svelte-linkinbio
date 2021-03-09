@@ -1,5 +1,6 @@
 <script>
-  import { link } from "svelte-spa-router";
+  import { link } from "svelte-routing";
+  const push = () => history.push("/create");
 </script>
 
 <body>
@@ -86,12 +87,17 @@
             </div>
           </div>
           <div class="my-4">
-            <a href="/create" use:link class="btn btn-primary btn-lg mr-1"
-              >Create</a
+            <a
+              href="/create"
+              use:link
+              replace
+              class="btn btn-primary btn-lg mr-1">Create</a
             >
             <a
               href="/login"
               use:link
+              on:click={push}
+              replace
               class="btn btn-outline-primary btn-lg mr-1">Login</a
             >
           </div>

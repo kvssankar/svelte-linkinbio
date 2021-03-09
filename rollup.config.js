@@ -44,6 +44,7 @@ export default {
     svelte({
       compilerOptions: {
         // enable run-time checks when not in production
+        hydratable: true,
         dev: !production,
       },
     }),
@@ -74,6 +75,7 @@ export default {
     // instead of npm run dev), minify
     production && terser(),
   ],
+
   watch: {
     clearScreen: false,
   },

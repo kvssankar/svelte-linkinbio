@@ -1,14 +1,13 @@
-const { createServer } = require("http");
-const app = require("./dist/App.js");
+const path = require("path");
+const express = require("express");
 
-createServer((req, res) => {
-  const { html } = app.render({ url: req.url });
+const server = express();
 
-  res.write(`
-    <!DOCTYPE html>
-    <div id="app">${html}</div>
-    <script src="/dist/bundle.js"></script>
-  `);
+server.use(express.static(path.join(__dirname, "public")));
 
-  res.end();
-}).listen(3000);
+server.get("*", (req, res) => {
+  res.sendFile(path.resolve(__dirname, "public", "index.html"));
+});
+
+const port = 3000;
+server.listen(port, () => console.log(`Listening on port ${port}`));

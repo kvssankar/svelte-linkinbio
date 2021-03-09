@@ -1,5 +1,5 @@
 <script>
-  import { link } from "svelte-spa-router";
+  import { link } from "svelte-routing";
 </script>
 
 <body
@@ -50,7 +50,7 @@
                           placeholder="Enter your password"
                         />
                         <small>
-                          <a use:link href="pages-reset-password.html"
+                          <a use:link replace href="/resetpassword"
                             >Forgot password?</a
                           >
                         </small>
