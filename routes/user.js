@@ -9,7 +9,8 @@ const { User } = require("../models/User");
 const { Link } = require("../models/Link");
 
 router.post("/register", async (req, res) => {
-  const { name, password, instagram, facebook, twitter } = req.body;
+  console.log(req.body);
+  const { dp, email, password, instagram, facebook, twitter } = req.body;
   const salt = await bc.genSalt(10);
   const hashed = await bc.hash(password, salt);
   const userExist = await User.findOne({ instagram: instagram });
@@ -19,8 +20,10 @@ router.post("/register", async (req, res) => {
   const newUser = new User({
     password: hashed,
     instagram,
+    email,
     facebook,
     twitter,
+    dp,
   });
   try {
     const addedUser = await newUser.save();
@@ -40,14 +43,14 @@ router.post("/login", async (req, res) => {
   if (!validPassword)
     return res.status(400).json({ status: 1, mssg: "Password does not match" });
   const token = jwt.sign({ _id: userExist._id }, config.jwt_secret);
-  return res.json({ token, user: userExist, meetings, acts, events });
+  return res.json({ token, user: userExist });
 });
 
 //links routes
 
 router.post("/add", verify, async (req, res) => {
-  const { url, title, image } = req.body;
-  const newLink = new Link({ url, title, imageurl, title, image });
+  const { url, title, image, description } = req.body;
+  const newLink = new Link({ url, title, image, description });
   User.findById(req.user._id, { $push: { links: new_link } }, { new: true })
     .then((data) => res.json(data))
     .catch((err) =>

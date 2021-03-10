@@ -1,13 +1,16 @@
 <script>
-  import { link } from "svelte-routing";
-  import axios from "axios";
   import Alert from "../components/Alert.svelte";
-  import userStore from "../store/User.js";
+  import axios from "axios";
+  let dp =
+    "https://st3.depositphotos.com/4111759/13425/v/600/depositphotos_134255710-stock-illustration-avatar-vector-male-profile-gray.jpg";
   let user = {
     password: "",
     instagram: "",
+    facebook: "",
+    twitter: "",
+    email: "",
+    dp,
   };
-  let dp = "img/avatars/avatar.jpg";
   let loading = false;
   function getPhoto(a) {
     loading = true;
@@ -30,9 +33,10 @@
   }
   let status = -1;
   let mssg = "";
-  const login = (e) => {
+  const register = (e) => {
+    console.log(JSON.stringify(user));
     e.preventDefault();
-    fetch("/api/user/login", {
+    fetch("/api/user/register", {
       method: "POST", // *GET, POST, PUT, DELETE, etc.
       mode: "cors", // no-cors, *cors, same-origin
       cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
@@ -49,14 +53,15 @@
         return response.json();
       })
       .then(function (data) {
-        userStore.update((currUser) => {
-          return { token: data.token, user: data.user };
-        });
-        document.location.href = "/";
+        localStorage.setItem("token", data.token);
+        localStorage.setItem("user", JSON.stringify(data.user));
+        mssg = "Sussessfully registered";
+        status = 0;
       })
       .catch((error) => {
+        console.error("Error:", error);
         status = 1;
-        mssg = error.mssg;
+        mssg = "Something went wrong, please try again";
       });
   };
 </script>
@@ -74,8 +79,11 @@
           <div class="col-sm-10 col-md-8 col-lg-6 mx-auto d-table h-100">
             <div class="d-table-cell align-middle">
               <div class="text-center mt-4">
-                <h1 class="h2">Welcome back, Chris</h1>
-                <p class="lead">Sign in to your account to continue</p>
+                <h1 class="h2">Get started</h1>
+                <p class="lead">
+                  Start creating the best possible user experience for you
+                  followers.
+                </p>
               </div>
 
               <div class="card">
@@ -96,9 +104,9 @@
                         />
                       {/if}
                     </div>
-                    <form on:submit={login}>
+                    <form on:submit={register}>
                       <div class="form-group">
-                        <label for="">Instagram</label>
+                        <label for="">Instagram Username</label>
                         <input
                           on:change={() => {
                             getPhoto(user.instagram);
@@ -106,7 +114,36 @@
                           class="form-control form-control-lg"
                           type="text"
                           bind:value={user.instagram}
+                          required
                           placeholder="kvssankar"
+                        />
+                      </div>
+                      <div class="form-group">
+                        <label for="">Email for recovery</label>
+                        <input
+                          class="form-control form-control-lg"
+                          type="text"
+                          bind:value={user.email}
+                          required
+                          placeholder="kvs.sankar001@gmail.com"
+                        />
+                      </div>
+                      <div class="form-group">
+                        <label for="">Facebook</label>
+                        <input
+                          class="form-control form-control-lg"
+                          type="text"
+                          bind:value={user.facebook}
+                          placeholder="KvsSankarKumar"
+                        />
+                      </div>
+                      <div class="form-group">
+                        <label for="">Twitter</label>
+                        <input
+                          class="form-control form-control-lg"
+                          type="text"
+                          bind:value={user.twitter}
+                          placeholder="KvsSankar1"
                         />
                       </div>
                       <div class="form-group">
@@ -115,32 +152,14 @@
                           class="form-control form-control-lg"
                           type="password"
                           bind:value={user.password}
-                          placeholder="Enter your password"
+                          required
+                          placeholder="Enter password"
                         />
-                        <small>
-                          <a use:link replace href="/resetpassword"
-                            >Forgot password?</a
-                          >
-                        </small>
-                      </div>
-                      <div>
-                        <div
-                          class="custom-control custom-checkbox align-items-center"
-                        >
-                          <input
-                            type="checkbox"
-                            class="custom-control-input"
-                            value="remember-me"
-                            name="remember-me"
-                            checked
-                          />
-                          <label for="" class="custom-control-label text-small"
-                            >Remember me next time</label
-                          >
-                        </div>
                       </div>
                       <div class="text-center mt-3">
-                        <button class="btn btn-lg btn-primary">Sign in</button>
+                        <button type="submit" class="btn btn-lg btn-primary"
+                          >Sign up</button
+                        >
                       </div>
                     </form>
                   </div>
@@ -152,5 +171,6 @@
       </div>
     </main>
   </div>
+
   <Alert {mssg} {status} />
 </body>

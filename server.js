@@ -3,8 +3,10 @@ const express = require("express");
 const config = require("./config");
 const app = express();
 const mongoose = require("mongoose");
+const axios = require("axios");
 
 app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
 app.use(express.static(path.join(__dirname, "public")));
 
@@ -18,6 +20,13 @@ const connect = mongoose
   .catch((err) => console.log(err));
 
 app.use("/api/user", require("./routes/user"));
+
+app.post("/dp", (req, res) => {
+  axios
+    .get(`https://www.instagram.com/${req.body.instagram}/?__a=1`)
+    .then((data) => res.json(data.data))
+    .catch((err) => res.json(err));
+});
 
 app.get("*", (req, res) => {
   res.sendFile(path.resolve(__dirname, "public", "index.html"));

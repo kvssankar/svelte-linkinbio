@@ -18,8 +18,10 @@
     "svelte": "^3.0.0"
   },
   "dependencies": {
+    "axios": "^0.21.1",
     "bcryptjs": "^2.4.3",
     "express": "^4.17.1",
+    "jquery": "^3.6.0",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.11.19",
     "sirv-cli": "^1.0.0",

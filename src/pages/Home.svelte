@@ -88,7 +88,7 @@
           </div>
           <div class="my-4">
             <a
-              href="/create"
+              href="/register"
               use:link
               replace
               class="btn btn-primary btn-lg mr-1">Create</a

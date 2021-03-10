@@ -5,6 +5,7 @@ const linkSchema = new Schema({
   url: String,
   title: String,
   image: String,
+  description: { type: String, default: "Click on the link below" },
   clicks: { type: Number, default: 0 },
   likes: { type: Number, default: 0 },
 });
