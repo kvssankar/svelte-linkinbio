@@ -1,13 +1,27 @@
 const path = require("path");
 const express = require("express");
+const config = require("./config");
+const app = express();
+const mongoose = require("mongoose");
 
-const server = express();
+app.use(express.urlencoded({ extended: true }));
 
-server.use(express.static(path.join(__dirname, "public")));
+app.use(express.static(path.join(__dirname, "public")));
 
-server.get("*", (req, res) => {
+const connect = mongoose
+  .connect(config.mongouri, {
+    useFindAndModify: false,
+    useUnifiedTopology: true,
+    useNewUrlParser: true,
+  })
+  .then(() => console.log("Mondo db connected...."))
+  .catch((err) => console.log(err));
+
+app.use("/api/user", require("./routes/user"));
+
+app.get("*", (req, res) => {
   res.sendFile(path.resolve(__dirname, "public", "index.html"));
 });
 
 const port = 3000;
-server.listen(port, () => console.log(`Listening on port ${port}`));
+app.listen(port, () => console.log(`Listening on port ${port}`));
