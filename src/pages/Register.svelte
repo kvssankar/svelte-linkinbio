@@ -66,111 +66,104 @@
   };
 </script>
 
-<body
-  data-theme="default"
-  data-layout="fluid"
-  data-sidebar-position="left"
-  data-sidebar-behavior="sticky"
->
-  <div class="main d-flex justify-content-center w-100">
-    <main class="content d-flex p-0">
-      <div class="container d-flex flex-column">
-        <div class="row h-100">
-          <div class="col-sm-10 col-md-8 col-lg-6 mx-auto d-table h-100">
-            <div class="d-table-cell align-middle">
-              <div class="text-center mt-4">
-                <h1 class="h2">Get started</h1>
-                <p class="lead">
-                  Start creating the best possible user experience for you
-                  followers.
-                </p>
-              </div>
+<div class="main d-flex justify-content-center w-100">
+  <main class="content d-flex p-0">
+    <div class="container d-flex flex-column">
+      <div class="row h-100">
+        <div class="col-sm-10 col-md-8 col-lg-6 mx-auto d-table h-100">
+          <div class="d-table-cell align-middle">
+            <div class="text-center mt-4">
+              <h1 class="h2">Get started</h1>
+              <p class="lead">
+                Start creating the best possible user experience for you
+                followers.
+              </p>
+            </div>
 
-              <div class="card">
-                <div class="card-body">
-                  <div class="m-sm-4">
-                    <div class="text-center">
-                      {#if loading}
-                        <div class="spinner-border text-primary" role="status">
-                          <span class="sr-only">Loading...</span>
-                        </div>
-                      {:else}
-                        <img
-                          src={dp}
-                          alt="Chris Wood"
-                          class="img-fluid rounded-circle"
-                          width="132"
-                          height="132"
-                        />
-                      {/if}
-                    </div>
-                    <form on:submit={register}>
-                      <div class="form-group">
-                        <label for="">Instagram Username</label>
-                        <input
-                          on:change={() => {
-                            getPhoto(user.instagram);
-                          }}
-                          class="form-control form-control-lg"
-                          type="text"
-                          bind:value={user.instagram}
-                          required
-                          placeholder="kvssankar"
-                        />
+            <div class="card">
+              <div class="card-body">
+                <div class="m-sm-4">
+                  <div class="text-center">
+                    {#if loading}
+                      <div class="spinner-border text-primary" role="status">
+                        <span class="sr-only">Loading...</span>
                       </div>
-                      <div class="form-group">
-                        <label for="">Email for recovery</label>
-                        <input
-                          class="form-control form-control-lg"
-                          type="text"
-                          bind:value={user.email}
-                          required
-                          placeholder="kvs.sankar001@gmail.com"
-                        />
-                      </div>
-                      <div class="form-group">
-                        <label for="">Facebook</label>
-                        <input
-                          class="form-control form-control-lg"
-                          type="text"
-                          bind:value={user.facebook}
-                          placeholder="KvsSankarKumar"
-                        />
-                      </div>
-                      <div class="form-group">
-                        <label for="">Twitter</label>
-                        <input
-                          class="form-control form-control-lg"
-                          type="text"
-                          bind:value={user.twitter}
-                          placeholder="KvsSankar1"
-                        />
-                      </div>
-                      <div class="form-group">
-                        <label for="">Password</label>
-                        <input
-                          class="form-control form-control-lg"
-                          type="password"
-                          bind:value={user.password}
-                          required
-                          placeholder="Enter password"
-                        />
-                      </div>
-                      <div class="text-center mt-3">
-                        <button type="submit" class="btn btn-lg btn-primary"
-                          >Sign up</button
-                        >
-                      </div>
-                    </form>
+                    {:else}
+                      <img
+                        src={dp}
+                        alt="Chris Wood"
+                        class="img-fluid rounded-circle"
+                        width="132"
+                        height="132"
+                      />
+                    {/if}
                   </div>
+                  <form on:submit={register}>
+                    <div class="form-group">
+                      <label for="">Instagram Username</label>
+                      <input
+                        on:change={() => {
+                          getPhoto(user.instagram);
+                        }}
+                        class="form-control form-control-lg"
+                        type="text"
+                        bind:value={user.instagram}
+                        required
+                        placeholder="kvssankar"
+                      />
+                    </div>
+                    <div class="form-group">
+                      <label for="">Email for recovery</label>
+                      <input
+                        class="form-control form-control-lg"
+                        type="text"
+                        bind:value={user.email}
+                        required
+                        placeholder="kvs.sankar001@gmail.com"
+                      />
+                    </div>
+                    <div class="form-group">
+                      <label for="">Facebook</label>
+                      <input
+                        class="form-control form-control-lg"
+                        type="text"
+                        bind:value={user.facebook}
+                        placeholder="KvsSankarKumar"
+                      />
+                    </div>
+                    <div class="form-group">
+                      <label for="">Twitter</label>
+                      <input
+                        class="form-control form-control-lg"
+                        type="text"
+                        bind:value={user.twitter}
+                        placeholder="KvsSankar1"
+                      />
+                    </div>
+                    <div class="form-group">
+                      <label for="">Password</label>
+                      <input
+                        class="form-control form-control-lg"
+                        type="password"
+                        bind:value={user.password}
+                        required
+                        placeholder="Enter password"
+                      />
+                    </div>
+                    <div class="text-center mt-3">
+                      <button type="submit" class="btn btn-lg btn-primary"
+                        >Sign up</button
+                      >
+                    </div>
+                  </form>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </main>
-  </div>
+    </div>
+  </main>
+</div>
 
-  <Alert {mssg} {status} />
-</body>
+<Alert {mssg} {status} />

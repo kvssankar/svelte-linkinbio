@@ -2,7 +2,7 @@
   import { link } from "svelte-routing";
   import axios from "axios";
   import Alert from "../components/Alert.svelte";
-  import userStore from "../store/User.js";
+  import { userStore } from "../store/User.js";
   let user = {
     password: "",
     instagram: "",
@@ -52,7 +52,7 @@
         userStore.update((currUser) => {
           return { token: data.token, user: data.user };
         });
-        document.location.href = "/";
+        document.location.href = "/dashboard";
       })
       .catch((error) => {
         status = 1;
@@ -61,96 +61,89 @@
   };
 </script>
 
-<body
-  data-theme="default"
-  data-layout="fluid"
-  data-sidebar-position="left"
-  data-sidebar-behavior="sticky"
->
-  <div class="main d-flex justify-content-center w-100">
-    <main class="content d-flex p-0">
-      <div class="container d-flex flex-column">
-        <div class="row h-100">
-          <div class="col-sm-10 col-md-8 col-lg-6 mx-auto d-table h-100">
-            <div class="d-table-cell align-middle">
-              <div class="text-center mt-4">
-                <h1 class="h2">Welcome back, Chris</h1>
-                <p class="lead">Sign in to your account to continue</p>
-              </div>
+<div class="main d-flex justify-content-center w-100">
+  <main class="content d-flex p-0">
+    <div class="container d-flex flex-column">
+      <div class="row h-100">
+        <div class="col-sm-10 col-md-8 col-lg-6 mx-auto d-table h-100">
+          <div class="d-table-cell align-middle">
+            <div class="text-center mt-4">
+              <h1 class="h2">Welcome back, Chris</h1>
+              <p class="lead">Sign in to your account to continue</p>
+            </div>
 
-              <div class="card">
-                <div class="card-body">
-                  <div class="m-sm-4">
-                    <div class="text-center">
-                      {#if loading}
-                        <div class="spinner-border text-primary" role="status">
-                          <span class="sr-only">Loading...</span>
-                        </div>
-                      {:else}
-                        <img
-                          src={dp}
-                          alt="Chris Wood"
-                          class="img-fluid rounded-circle"
-                          width="132"
-                          height="132"
-                        />
-                      {/if}
-                    </div>
-                    <form on:submit={login}>
-                      <div class="form-group">
-                        <label for="">Instagram</label>
-                        <input
-                          on:change={() => {
-                            getPhoto(user.instagram);
-                          }}
-                          class="form-control form-control-lg"
-                          type="text"
-                          bind:value={user.instagram}
-                          placeholder="kvssankar"
-                        />
+            <div class="card">
+              <div class="card-body">
+                <div class="m-sm-4">
+                  <div class="text-center">
+                    {#if loading}
+                      <div class="spinner-border text-primary" role="status">
+                        <span class="sr-only">Loading...</span>
                       </div>
-                      <div class="form-group">
-                        <label for="">Password</label>
-                        <input
-                          class="form-control form-control-lg"
-                          type="password"
-                          bind:value={user.password}
-                          placeholder="Enter your password"
-                        />
-                        <small>
-                          <a use:link replace href="/resetpassword"
-                            >Forgot password?</a
-                          >
-                        </small>
-                      </div>
-                      <div>
-                        <div
-                          class="custom-control custom-checkbox align-items-center"
-                        >
-                          <input
-                            type="checkbox"
-                            class="custom-control-input"
-                            value="remember-me"
-                            name="remember-me"
-                            checked
-                          />
-                          <label for="" class="custom-control-label text-small"
-                            >Remember me next time</label
-                          >
-                        </div>
-                      </div>
-                      <div class="text-center mt-3">
-                        <button class="btn btn-lg btn-primary">Sign in</button>
-                      </div>
-                    </form>
+                    {:else}
+                      <img
+                        src={dp}
+                        alt="Chris Wood"
+                        class="img-fluid rounded-circle"
+                        width="132"
+                        height="132"
+                      />
+                    {/if}
                   </div>
+                  <form on:submit={login}>
+                    <div class="form-group">
+                      <label for="">Instagram</label>
+                      <input
+                        on:change={() => {
+                          getPhoto(user.instagram);
+                        }}
+                        class="form-control form-control-lg"
+                        type="text"
+                        bind:value={user.instagram}
+                        placeholder="kvssankar"
+                      />
+                    </div>
+                    <div class="form-group">
+                      <label for="">Password</label>
+                      <input
+                        class="form-control form-control-lg"
+                        type="password"
+                        bind:value={user.password}
+                        placeholder="Enter your password"
+                      />
+                      <small>
+                        <a use:link replace href="/resetpassword"
+                          >Forgot password?</a
+                        >
+                      </small>
+                    </div>
+                    <div>
+                      <div
+                        class="custom-control custom-checkbox align-items-center"
+                      >
+                        <input
+                          type="checkbox"
+                          class="custom-control-input"
+                          value="remember-me"
+                          name="remember-me"
+                          checked
+                        />
+                        <label for="" class="custom-control-label text-small"
+                          >Remember me next time</label
+                        >
+                      </div>
+                    </div>
+                    <div class="text-center mt-3">
+                      <button class="btn btn-lg btn-primary">Sign in</button>
+                    </div>
+                  </form>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </main>
-  </div>
-  <Alert {mssg} {status} />
-</body>
+    </div>
+  </main>
+</div>
+<Alert {mssg} {status} />

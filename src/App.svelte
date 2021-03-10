@@ -4,7 +4,7 @@
   import Login from "./pages/Login.svelte";
   import Register from "./pages/Register.svelte";
   import ResetPassword from "./pages/ResetPassword.svelte";
-
+  import Dashboard from "./pages/Dashboard.svelte";
   export let url = "";
 </script>
 
@@ -14,5 +14,6 @@
     <Route path="/login" component={Login} />
     <Route path="/register" component={Register} />
     <Route path="/resetpassword" component={ResetPassword} />
+    <Route path="/dashboard" component={Dashboard} />
   </div>
 </Router>
