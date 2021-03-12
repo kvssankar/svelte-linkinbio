@@ -51,11 +51,21 @@ router.post("/login", async (req, res) => {
 router.post("/add", verify, async (req, res) => {
   const { url, title, image, description } = req.body;
   const newLink = new Link({ url, title, image, description });
-  User.findById(req.user._id, { $push: { links: new_link } }, { new: true })
-    .then((data) => res.json(data))
-    .catch((err) =>
-      res.status(500).json({ status: 1, mssg: "Something went wrong" })
-    );
+  User.findByIdAndUpdate(
+    req.user._id,
+    { $push: { links: newLink } },
+    { new: true }
+  )
+    .then((data) => {
+      data.links = data.links.sort(function (a, b) {
+        return new Date(b.created_date) - new Date(a.created_date);
+      });
+      res.json(data);
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json({ status: 1, mssg: "Something went wrong" });
+    });
 });
 
 router.post("/update", verify, async (req, res) => {
@@ -76,6 +86,20 @@ router.post("/delete", verify, async (req, res) => {
   await User.links.pull(_id).remove();
   await User.save()
     .then((data) => res.json({ mssg: "Successfully deleted" }))
+    .catch((err) =>
+      res.status(500).json({ status: 1, mssg: "Something went wrong" })
+    );
+});
+
+router.get("/info", verify, async (req, res) => {
+  const { _id } = req.user;
+  await User.findById(_id)
+    .then((data) => {
+      data.links = data.links.sort(function (a, b) {
+        return new Date(b.created_date) - new Date(a.created_date);
+      });
+      res.json(data);
+    })
     .catch((err) =>
       res.status(500).json({ status: 1, mssg: "Something went wrong" })
     );

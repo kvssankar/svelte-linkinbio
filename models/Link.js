@@ -8,6 +8,7 @@ const linkSchema = new Schema({
   description: { type: String, default: "Click on the link below" },
   clicks: { type: Number, default: 0 },
   likes: { type: Number, default: 0 },
+  created_date: { type: Date, default: Date.now },
 });
 
 const Link = mongoose.model("link", linkSchema);

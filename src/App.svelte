@@ -5,6 +5,7 @@
   import Register from "./pages/Register.svelte";
   import ResetPassword from "./pages/ResetPassword.svelte";
   import Dashboard from "./pages/Dashboard.svelte";
+  import AddLink from "./pages/AddLink.svelte";
   export let url = "";
 </script>
 
@@ -15,5 +16,6 @@
     <Route path="/register" component={Register} />
     <Route path="/resetpassword" component={ResetPassword} />
     <Route path="/dashboard" component={Dashboard} />
+    <Route path="/addlink" component={AddLink} />
   </div>
 </Router>

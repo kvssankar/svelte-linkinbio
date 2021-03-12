@@ -1,6 +1,7 @@
 <script>
   import Alert from "../components/Alert.svelte";
   import axios from "axios";
+  import { userStore } from "../store/User.js";
   let dp =
     "https://st3.depositphotos.com/4111759/13425/v/600/depositphotos_134255710-stock-illustration-avatar-vector-male-profile-gray.jpg";
   let user = {
@@ -9,7 +10,7 @@
     facebook: "",
     twitter: "",
     email: "",
-    dp,
+    dp: "",
   };
   let loading = false;
   function getPhoto(a) {
@@ -22,6 +23,7 @@
         .then(function (res) {
           console.log(res.data.graphql.user.profile_pic_url_hd);
           dp = res.data.graphql.user.profile_pic_url;
+          user.dp = res.data.graphql.user.profile_pic_url;
           loading = false;
         })
         .catch(function () {
@@ -53,10 +55,12 @@
         return response.json();
       })
       .then(function (data) {
-        localStorage.setItem("token", data.token);
-        localStorage.setItem("user", JSON.stringify(data.user));
         mssg = "Sussessfully registered";
         status = 0;
+        userStore.update((currUser) => {
+          return { token: data.token, user: data.user };
+        });
+        document.location.href = "/dashboard";
       })
       .catch((error) => {
         console.error("Error:", error);
