@@ -5,6 +5,7 @@
   import Footer from "../components/Footer.svelte";
   import { userStore } from "../store/User.js";
   import { AvatarGenerator } from "random-avatar-generator";
+  import ImageLoader from "../components/ImageLoader.svelte";
   const generator = new AvatarGenerator();
   let dp =
     "https://st3.depositphotos.com/4111759/13425/v/600/depositphotos_134255710-stock-illustration-avatar-vector-male-profile-gray.jpg";
@@ -83,13 +84,7 @@
                         <span class="sr-only">Loading...</span>
                       </div>
                     {:else}
-                      <img
-                        src={dp}
-                        alt="Not found user"
-                        class="img-fluid rounded-circle"
-                        width="132"
-                        height="132"
-                      />
+                      <ImageLoader src={dp} alt="Not found" />
                     {/if}
                   </div>
                   <form on:submit={register}>
