@@ -4,6 +4,8 @@ const config = require("./config");
 const app = express();
 const mongoose = require("mongoose");
 const axios = require("axios");
+const cors = require("cors");
+app.use(cors());
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -22,6 +24,7 @@ const connect = mongoose
 app.use("/api/user", require("./routes/user"));
 
 app.post("/dp", (req, res) => {
+  console.log(req.body);
   axios
     .get(`https://www.instagram.com/${req.body.instagram}/?__a=1`)
     .then((data) => res.json(data.data))
