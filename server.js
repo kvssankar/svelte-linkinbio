@@ -31,5 +31,5 @@ app.get("*", (req, res) => {
   res.sendFile(path.resolve(__dirname, "public", "index.html"));
 });
 
-const port = 3000;
+const port = 3000 || process.env.PORT;
 app.listen(port, () => console.log(`Listening on port ${port}`));
