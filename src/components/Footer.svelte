@@ -4,13 +4,13 @@
       <div class="col-6 text-left">
         <ul class="list-inline">
           <li class="list-inline-item">
-            <a class="text-muted" href="/">Support</a>
+            <a class="text-muted" href="https://github.com/kvssankar">Github</a>
           </li>
           <li class="list-inline-item">
-            <a class="text-muted" href="/">Help Center</a>
+            <a class="text-muted" href="https://www.linkedin.com/in/sankarkvs/">Linkedin</a>
           </li>
           <li class="list-inline-item">
-            <a class="text-muted" href="/">Privacy</a>
+            <a class="text-muted" href="https://www.instagram.com/kvs_sk/">Instagram</a>
           </li>
           <li class="list-inline-item">
             <a class="text-muted" href="/">Terms of Service</a>
@@ -19,7 +19,7 @@
       </div>
       <div class="col-6 text-right">
         <p class="mb-0">
-          &copy; 2020 - <a href="index.html" class="text-muted">AppStack</a>
+          Made with ❤ by <a href="https://itsmesankar.herokuapp.com/" >KvsSankar</a>
         </p>
       </div>
     </div>

@@ -1,19 +1,23 @@
 <script>
   import Alert from "../components/Alert.svelte";
   import { addlink } from "../actions/User";
+  import { userStore } from "../store/User.js";
+  import NavBar from "../components/Navbar.svelte";
+  import Footer from "../components/Footer.svelte";
+
   let loading = false;
   let status = -1;
   let mssg = "";
   let image =
     "https://www.lifewire.com/thmb/P856-0hi4lmA2xinYWyaEpRIckw=/1920x1326/filters:no_upscale():max_bytes(150000):strip_icc()/cloud-upload-a30f385a928e44e199a62210d578375a.jpg";
-  let link = {
-    url: "",
-    title: "",
-    image: "",
-    description: "",
-    clicks: 0,
-    likes: 0,
-  };
+  let link;
+  let user;
+  const unsubscribe = userStore.subscribe((data) => {
+    console.log(data);
+    link = data.link;
+    user = data.user;
+    image = link.image != "" || link.image != null ? link.image : image;
+  });
   const drop = async (e) => {
     loading = true;
     const files = e.target.files;
@@ -42,6 +46,7 @@
   };
 </script>
 
+<NavBar {user} />
 <div class="main d-flex justify-content-center w-100">
   <main class="content d-flex p-0">
     <div class="container d-flex flex-column">
@@ -127,3 +132,4 @@
 </div>
 
 <Alert {mssg} {status} />
+<Footer />

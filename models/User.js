@@ -16,6 +16,8 @@ const userSchema = new Schema({
   twitter: String,
   views: { type: Number, default: 0 },
   links: [linkSchema],
+  total_links: { type: Number, default: 0 },
+  resetpassword:{type:String,default:null}
 });
 
 //TODO Add fields by admins

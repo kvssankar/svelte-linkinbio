@@ -1,6 +1,8 @@
 <script>
   import Alert from "../components/Alert.svelte";
   import axios from "axios";
+  import HomeNav from "../components/HomeNav.svelte";
+  import Footer from "../components/Footer.svelte";
   import { userStore } from "../store/User.js";
   let dp =
     "https://st3.depositphotos.com/4111759/13425/v/600/depositphotos_134255710-stock-illustration-avatar-vector-male-profile-gray.jpg";
@@ -70,12 +72,13 @@
   };
 </script>
 
+<HomeNav />
 <div class="main d-flex justify-content-center w-100">
   <main class="content d-flex p-0">
     <div class="container d-flex flex-column">
       <div class="row h-100">
         <div class="col-sm-10 col-md-8 col-lg-6 mx-auto d-table h-100">
-          <div class="d-table-cell align-middle">
+          <div class="align-middle">
             <div class="text-center mt-4">
               <h1 class="h2">Get started</h1>
               <p class="lead">
@@ -95,7 +98,7 @@
                     {:else}
                       <img
                         src={dp}
-                        alt="Chris Wood"
+                        alt="Not found user"
                         class="img-fluid rounded-circle"
                         width="132"
                         height="132"
@@ -171,3 +174,4 @@
 </div>
 
 <Alert {mssg} {status} />
+<Footer />

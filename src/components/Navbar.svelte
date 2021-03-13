@@ -141,21 +141,21 @@
           <img
             src={user.dp}
             class="avatar img-fluid rounded-circle mr-1"
-            alt="Chris Wood"
-          /> <span class="text-dark">Chris Wood</span>
+            alt={user.instagram}
+          /> <span class="text-dark">{user.instagram}</span>
         </a>
         <div class="dropdown-menu dropdown-menu-right">
-          <a class="dropdown-item" href="pages-profile.html"
+          <a class="dropdown-item" href="/{user.instagram}"
             ><i class="align-middle mr-1" data-feather="user" /> Profile</a
           >
-          <a class="dropdown-item" href="/"
-            ><i class="align-middle mr-1" data-feather="pie-chart" /> Analytics</a
+          <a class="dropdown-item" href="/dashboard"
+            ><i class="align-middle mr-1" data-feather="pie-chart" /> Dashboard</a
           >
           <div class="dropdown-divider" />
-          <a class="dropdown-item" href="pages-settings.html"
+          <a class="dropdown-item" href="/settings"
             >Settings & Privacy</a
           >
-          <a class="dropdown-item" href="/">Help</a>
+          <a class="dropdown-item" href="/copyright">Help</a>
           <a class="dropdown-item" href="/">Sign out</a>
         </div>
       </li>

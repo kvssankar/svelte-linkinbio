@@ -7,6 +7,8 @@ const verify = require("../verify");
 
 const { User } = require("../models/User");
 const { Link } = require("../models/Link");
+var generator = require("generate-password");
+var nodemailer = require("nodemailer");
 
 router.post("/register", async (req, res) => {
   console.log(req.body);
@@ -53,7 +55,7 @@ router.post("/add", verify, async (req, res) => {
   const newLink = new Link({ url, title, image, description });
   User.findByIdAndUpdate(
     req.user._id,
-    { $push: { links: newLink } },
+    { $push: { links: newLink }, $inc: { total_links: 1 } },
     { new: true }
   )
     .then((data) => {
@@ -83,8 +85,11 @@ router.post("/update", verify, async (req, res) => {
 
 router.post("/delete", verify, async (req, res) => {
   const { _id } = req.body;
-  await User.links.pull(_id).remove();
-  await User.save()
+  await User.findByIdAndUpdate(
+    req.user._id,
+    { $pull: { links: { _id: _id } } },
+    { new: true }
+  )
     .then((data) => res.json({ mssg: "Successfully deleted" }))
     .catch((err) =>
       res.status(500).json({ status: 1, mssg: "Something went wrong" })
@@ -103,6 +108,69 @@ router.get("/info", verify, async (req, res) => {
     .catch((err) =>
       res.status(500).json({ status: 1, mssg: "Something went wrong" })
     );
+});
+
+router.post("/displayuser", async (req, res) => {
+  const { name } = req.body;
+  await User.findOne({ instagram: name })
+    .select("-password")
+    .then((data) => {
+      data.links = data.links.sort(function (a, b) {
+        return new Date(b.created_date) - new Date(a.created_date);
+      });
+      res.json(data);
+    })
+    .catch((err) =>
+      res.status(500).json({ status: 1, mssg: "Something went wrong" })
+    );
+});
+
+router.post("/resetpassword", async (req, res) => {
+  var password = generator.generate({
+    length: 10,
+    numbers: true,
+  });
+  let user = await User.findOne({ email: req.body.email });
+  if (!user) return res.json({ status: 1, mssg: "Email not found" });
+  user = await User.findOneAndUpdate(
+    { email: email },
+    { resetpassword: password },
+    { new: true }
+  );
+  var transporter = nodemailer.createTransport({
+    service: "gmail",
+    auth: {
+      user: "miniorganisation@gmail.com",
+      pass: "sankarvishnu23",
+    },
+  });
+
+  var mailOptions = {
+    from: "miniorganisation@gmail.com",
+    to: req.body.email,
+    subject: "LinkInBio ResetPassword",
+    text: "If its not you please ignore!! " + "Otp : " + password,
+  };
+
+  transporter.sendMail(mailOptions, function (error, info) {
+    if (error) {
+      console.log(error);
+      return res.json({ status: 1, mssg: "Something went wrong" });
+    } else {
+      return res.json({
+        status: 0,
+        mssg: "Sent email, please check your inbox",
+      });
+    }
+  });
+});
+
+router.post("/check", async (req, res) => {
+  const { email, otp, password } = req.body;
+  let user = await User.findOne({ email, resetpassword: otp });
+  if (!user) return res.json({ status: 1, mssg: "Re-enter OTP" });
+  await User.findOneAndUpdate({ email }, { password });
+  return res.json({ status: 0, mssg: "Successfully updated" });
 });
 
 module.exports = router;

@@ -4,11 +4,29 @@
   import { userStore } from "../store/User.js";
   import NavBar from "../components/Navbar.svelte";
   import Footer from "../components/Footer.svelte";
+  import { deletelink } from "../actions/User.js";
   let user = {};
   const unsubscribe = userStore.subscribe((data) => {
     console.log(data);
     user = data.user;
   });
+  let status = -1;
+  let mssg = "";
+  const deleteLink = async (a) => {
+    if (!confirm("Are you sure you want to delete this ?")) {
+      return;
+    }
+    let res = await deletelink(a);
+    status = res.status;
+    mssg = res.mssg;
+  };
+  const editlink = async (a) => {
+    await userStore.update((currUser) => {
+      console.log("updated");
+      return { token: currUser.token, user: currUser.user, link: a };
+    });
+    document.location.href = "/editlink";
+  };
 </script>
 
 <div class="main">
@@ -52,8 +70,17 @@
                       <a href={link.url} class="btn btn-sm btn-success mt-1"
                         >Go to link</a
                       >
-                      <a href={link.url} class="btn btn-sm btn-primary mt-1"
-                        >Edit</a
+                      <button
+                        on:click={() => {
+                          editlink(link);
+                        }}
+                        class="btn btn-sm btn-primary mt-1">Edit</button
+                      >
+                      <button
+                        on:click={() => {
+                          deleteLink(link._id);
+                        }}
+                        class="btn btn-sm btn-danger mt-1">Delete</button
                       >
                     </div>
                   </div>
@@ -78,6 +105,12 @@
                       <a href={link.url} class="btn btn-sm btn-primary mt-1"
                         >Edit</a
                       >
+                      <button
+                        on:click={() => {
+                          deleteLink(link._id);
+                        }}
+                        class="btn btn-sm btn-danger mt-1">Delete</button
+                      >
                     </div>
                   </div>
                 {/if}
@@ -92,13 +125,15 @@
             <div class="card-body text-center">
               <img
                 src={user.dp}
-                alt="Chris Wood"
+                alt={user.instagram}
                 class="img-fluid rounded-circle mb-2"
                 width="128"
                 height="128"
               />
-              <h4 class="card-title mb-0">Chris Wood</h4>
-              <div class="text-muted mb-2">UX Engineer</div>
+              <h4 class="card-title mb-0">{user.instagram}</h4>
+              <div class="text-muted mb-2">
+                Links Uploaded : {user.total_links || 0}
+              </div>
 
               <div>
                 <a
@@ -107,8 +142,11 @@
                   replace
                   href="/addlink">Add link</a
                 >
-                <a class="btn btn-primary btn-sm" href="/"
-                  ><span data-feather="message-square" /> Message</a
+                <a
+                  class="btn btn-danger btn-sm"
+                  target="_blank"
+                  href={"https://www.instagram.com/" + user.instagram + "/"}
+                  ><span data-feather="instagram" /> Instagram</a
                 >
               </div>
             </div>
@@ -118,12 +156,12 @@
             <div class="card-header">
               <div class="card-actions float-right">
                 <div class="dropdown show">
-                  <a href="/" data-toggle="dropdown" data-display="static">
+                  <a href="/dashboard" data-toggle="dropdown" data-display="static">
                     <i class="align-middle" data-feather="more-horizontal" />
                   </a>
 
                   <div class="dropdown-menu dropdown-menu-right">
-                    <a class="dropdown-item" href="/">View all</a>
+                    <a class="dropdown-item" href="/dashboard">View all</a>
                   </div>
                 </div>
               </div>

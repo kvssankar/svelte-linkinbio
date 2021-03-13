@@ -1,59 +1,11 @@
 <script>
   import { link } from "svelte-routing";
+  import HomeNav from "../components/HomeNav.svelte";
+  import Footer from "../components/Footer.svelte";
   const push = () => history.push("/create");
 </script>
 
-<nav class="navbar navbar-expand-md navbar-light landing-navbar">
-  <div class="container">
-    <a class="navbar-brand landing-brand" href="/">
-      <img src="/img/link.png" alt="LinkInBio" height="34px" />
-      LinkInBio
-    </a>
-
-    <ul class="navbar-nav ml-auto">
-      <!-- <li class="nav-item active d-none d-lg-inline-block">
-            <a
-              class="nav-link text-lg px-lg-3"
-              href="https://appstack-bs5.bootlab.io/"
-              target="_blank"
-              >Bootstrap 5 <i
-                class="mt-n1 ml-1"
-                data-feather="external-link"
-              /></a
-            >
-          </li>
-          <li class="nav-item active d-none d-md-inline-block">
-            <a
-              class="nav-link text-lg px-lg-3"
-              href="dashboard-default.html"
-              target="_blank">Live Preview</a
-            >
-          </li> -->
-      <li class="nav-item active">
-        <a
-          class="nav-link text-lg px-lg-3"
-          href="docs-introduction.html"
-          target="_blank"
-        >
-          <span class="d-inline-block d-md-none">Support</span>
-          <span class="d-none d-md-inline-block">Contribute</span>
-        </a>
-      </li>
-      <!-- <li class="nav-item active d-none d-md-inline-block">
-            <a
-              class="nav-link text-lg px-lg-3"
-              href="mailto:support@bootlab.io"
-              target="_blank">Support</a
-            >
-          </li> -->
-    </ul>
-    <a
-      href="https://themes.getbootstrap.com/product/appstack-responsive-admin-template/"
-      target="_blank"
-      class="btn btn-lg btn-success my-2 my-sm-0 ml-3">GitHub</a
-    >
-  </div>
-</nav>
+<HomeNav/>
 
 <section class="landing-intro landing-bg pt-5 pt-lg-6 pb-5 pb-lg-7">
   <div class="landing-intro-content container">
@@ -113,3 +65,5 @@
     </div>
   </div>
 </section>
+
+<Footer/>

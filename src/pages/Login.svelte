@@ -1,6 +1,8 @@
 <script>
   import { link } from "svelte-routing";
   import axios from "axios";
+  import HomeNav from "../components/HomeNav.svelte";
+  import Footer from "../components/Footer.svelte";
   import Alert from "../components/Alert.svelte";
   import { userStore } from "../store/User.js";
   let user = {
@@ -61,14 +63,15 @@
   };
 </script>
 
+<HomeNav />
 <div class="main d-flex justify-content-center w-100">
   <main class="content d-flex p-0">
     <div class="container d-flex flex-column">
       <div class="row h-100">
         <div class="col-sm-10 col-md-8 col-lg-6 mx-auto d-table h-100">
-          <div class="d-table-cell align-middle">
+          <div class="align-middle">
             <div class="text-center mt-4">
-              <h1 class="h2">Welcome back, Chris</h1>
+              <h1 class="h2">Welcome back</h1>
               <p class="lead">Sign in to your account to continue</p>
             </div>
 
@@ -83,7 +86,7 @@
                     {:else}
                       <img
                         src={dp}
-                        alt="Chris Wood"
+                        alt="Not found user"
                         class="img-fluid rounded-circle"
                         width="132"
                         height="132"
@@ -147,3 +150,4 @@
   </main>
 </div>
 <Alert {mssg} {status} />
+<Footer />

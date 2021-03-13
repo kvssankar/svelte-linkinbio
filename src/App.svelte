@@ -6,6 +6,9 @@
   import ResetPassword from "./pages/ResetPassword.svelte";
   import Dashboard from "./pages/Dashboard.svelte";
   import AddLink from "./pages/AddLink.svelte";
+  import EditLink from "./pages/EditLink.svelte";
+  import Display from "./pages/Display.svelte";
+  import Page404 from "./pages/Page404.svelte";
   export let url = "";
 </script>
 
@@ -17,5 +20,11 @@
     <Route path="/resetpassword" component={ResetPassword} />
     <Route path="/dashboard" component={Dashboard} />
     <Route path="/addlink" component={AddLink} />
+    <Route path="/editlink" component={EditLink} />
+    <Route path="/notfound" component={Page404} />
+    <Route path="/:name" let:params>
+      <Display name={params.name} />
+    </Route>
+    <Route path="*" component={Page404} />
   </div>
 </Router>
