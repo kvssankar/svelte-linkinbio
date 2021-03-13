@@ -4,6 +4,8 @@
   import HomeNav from "../components/HomeNav.svelte";
   import Footer from "../components/Footer.svelte";
   import { userStore } from "../store/User.js";
+  import { AvatarGenerator } from "random-avatar-generator";
+  const generator = new AvatarGenerator();
   let dp =
     "https://st3.depositphotos.com/4111759/13425/v/600/depositphotos_134255710-stock-illustration-avatar-vector-male-profile-gray.jpg";
   let user = {
@@ -17,23 +19,8 @@
   let loading = false;
   function getPhoto(a) {
     loading = true;
-    var regex = new RegExp(/^(?!.*\.\.)(?!.*\.$)[^\W][\w.]{0,29}$/);
-    var validation = regex.test(a);
-    if (validation) {
-      axios
-        .post("/dp", { instagram: user.instagram })
-        .then(function (res) {
-          console.log(res.data.graphql.user.profile_pic_url_hd);
-          dp = res.data.graphql.user.profile_pic_url;
-          user.dp = res.data.graphql.user.profile_pic_url;
-          loading = false;
-        })
-        .catch(function () {
-          return null;
-        });
-    } else {
-      return null;
-    }
+    dp = generator.generateRandomAvatar();
+    loading = false;
   }
   let status = -1;
   let mssg = "";
