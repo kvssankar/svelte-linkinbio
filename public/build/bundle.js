@@ -2251,7 +2251,7 @@ var app = (function () {
     			div = element("div");
     			a0 = element("a");
     			img = element("img");
-    			t0 = text("\r\n        LinkInBio");
+    			t0 = text("\r\n      LnkInBio");
     			t1 = space();
     			ul = element("ul");
     			li = element("li");
@@ -2274,7 +2274,7 @@ var app = (function () {
     			a0 = claim_element(div_nodes, "A", { class: true, href: true });
     			var a0_nodes = children(a0);
     			img = claim_element(a0_nodes, "IMG", { src: true, alt: true, height: true });
-    			t0 = claim_text(a0_nodes, "\r\n        LinkInBio");
+    			t0 = claim_text(a0_nodes, "\r\n      LnkInBio");
     			a0_nodes.forEach(detach_dev);
     			t1 = claim_space(div_nodes);
     			ul = claim_element(div_nodes, "UL", { class: true });
@@ -2306,30 +2306,30 @@ var app = (function () {
     		},
     		h: function hydrate() {
     			if (img.src !== (img_src_value = "/img/link.png")) attr_dev(img, "src", img_src_value);
-    			attr_dev(img, "alt", "LinkInBio");
+    			attr_dev(img, "alt", "LnkInBio");
     			attr_dev(img, "height", "34px");
-    			add_location(img, file$i, 3, 8, 159);
+    			add_location(img, file$i, 3, 6, 153);
     			attr_dev(a0, "class", "navbar-brand landing-brand");
     			attr_dev(a0, "href", "/");
-    			add_location(a0, file$i, 2, 6, 102);
+    			add_location(a0, file$i, 2, 4, 98);
     			attr_dev(span0, "class", "d-inline-block d-md-none");
-    			add_location(span0, file$i, 14, 12, 493);
+    			add_location(span0, file$i, 14, 10, 463);
     			attr_dev(span1, "class", "d-none d-md-inline-block");
-    			add_location(span1, file$i, 15, 12, 559);
+    			add_location(span1, file$i, 15, 10, 527);
     			attr_dev(a1, "class", "nav-link text-lg px-lg-3");
     			attr_dev(a1, "href", "https://github.com/kvssankar");
     			attr_dev(a1, "target", "_blank");
-    			add_location(a1, file$i, 9, 10, 340);
+    			add_location(a1, file$i, 9, 8, 320);
     			attr_dev(li, "class", "nav-item active");
-    			add_location(li, file$i, 8, 8, 300);
+    			add_location(li, file$i, 8, 6, 282);
     			attr_dev(ul, "class", "navbar-nav ml-auto");
-    			add_location(ul, file$i, 7, 6, 259);
+    			add_location(ul, file$i, 7, 4, 243);
     			attr_dev(a2, "href", "/register");
     			attr_dev(a2, "target", "_blank");
     			attr_dev(a2, "class", "btn btn-lg btn-success my-2 my-sm-0 ml-3");
-    			add_location(a2, file$i, 26, 6, 933);
+    			add_location(a2, file$i, 26, 4, 891);
     			attr_dev(div, "class", "container");
-    			add_location(div, file$i, 1, 4, 71);
+    			add_location(div, file$i, 1, 2, 69);
     			attr_dev(nav, "class", "navbar navbar-expand-md navbar-light landing-navbar");
     			add_location(nav, file$i, 0, 0, 0);
     		},
