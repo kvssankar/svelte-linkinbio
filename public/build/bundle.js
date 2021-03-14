@@ -17669,7 +17669,7 @@ var app = (function () {
     const { console: console_1$1 } = globals;
     const file$4 = "src\\components\\Card.svelte";
 
-    // (15:4) {#if link.image !== null && link.image !== ""}
+    // (14:4) {#if link.image !== null && link.image !== ""}
     function create_if_block$1(ctx) {
     	let img;
     	let img_src_value;
@@ -17687,7 +17687,7 @@ var app = (function () {
     			attr_dev(img, "class", "card-img-top");
     			if (img.src !== (img_src_value = /*link*/ ctx[0].image)) attr_dev(img, "src", img_src_value);
     			attr_dev(img, "alt", "Not available");
-    			add_location(img, file$4, 15, 6, 461);
+    			add_location(img, file$4, 14, 6, 423);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, img, anchor);
@@ -17706,7 +17706,7 @@ var app = (function () {
     		block,
     		id: create_if_block$1.name,
     		type: "if",
-    		source: "(15:4) {#if link.image !== null && link.image !== \\\"\\\"}",
+    		source: "(14:4) {#if link.image !== null && link.image !== \\\"\\\"}",
     		ctx
     	});
 
@@ -17729,8 +17729,9 @@ var app = (function () {
     	let t4_value = /*link*/ ctx[0].description + "";
     	let t4;
     	let t5;
-    	let button;
+    	let a;
     	let t6;
+    	let a_href_value;
     	let mounted;
     	let dispose;
     	let if_block = /*link*/ ctx[0].image !== null && /*link*/ ctx[0].image !== "" && create_if_block$1(ctx);
@@ -17751,7 +17752,7 @@ var app = (function () {
     			p = element("p");
     			t4 = text(t4_value);
     			t5 = space();
-    			button = element("button");
+    			a = element("a");
     			t6 = text("Click Here");
     			this.h();
     		},
@@ -17779,10 +17780,10 @@ var app = (function () {
     			t4 = claim_text(p_nodes, t4_value);
     			p_nodes.forEach(detach_dev);
     			t5 = claim_space(div1_nodes);
-    			button = claim_element(div1_nodes, "BUTTON", { class: true });
-    			var button_nodes = children(button);
-    			t6 = claim_text(button_nodes, "Click Here");
-    			button_nodes.forEach(detach_dev);
+    			a = claim_element(div1_nodes, "A", { href: true, target: true, class: true });
+    			var a_nodes = children(a);
+    			t6 = claim_text(a_nodes, "Click Here");
+    			a_nodes.forEach(detach_dev);
     			div1_nodes.forEach(detach_dev);
     			div2_nodes.forEach(detach_dev);
     			div3_nodes.forEach(detach_dev);
@@ -17790,22 +17791,24 @@ var app = (function () {
     		},
     		h: function hydrate() {
     			attr_dev(h5, "class", "card-title mb-0");
-    			add_location(h5, file$4, 18, 6, 576);
+    			add_location(h5, file$4, 17, 6, 538);
     			attr_dev(div0, "class", "card-header");
-    			add_location(div0, file$4, 17, 4, 543);
+    			add_location(div0, file$4, 16, 4, 505);
     			attr_dev(hr, "class", "mb-0");
-    			add_location(hr, file$4, 20, 4, 639);
+    			add_location(hr, file$4, 19, 4, 601);
     			attr_dev(p, "class", "card-text");
-    			add_location(p, file$4, 22, 6, 695);
-    			attr_dev(button, "class", "btn btn-primary");
-    			add_location(button, file$4, 25, 6, 764);
+    			add_location(p, file$4, 21, 6, 657);
+    			attr_dev(a, "href", a_href_value = /*link*/ ctx[0].url);
+    			attr_dev(a, "target", "_blank");
+    			attr_dev(a, "class", "btn btn-primary");
+    			add_location(a, file$4, 24, 6, 726);
     			attr_dev(div1, "class", "card-body");
-    			add_location(div1, file$4, 21, 4, 664);
+    			add_location(div1, file$4, 20, 4, 626);
     			attr_dev(div2, "class", "card sankarcard");
-    			add_location(div2, file$4, 13, 2, 372);
+    			add_location(div2, file$4, 12, 2, 334);
     			attr_dev(div3, "class", "col-12 col-md-6 col-lg-4");
     			set_style(div3, "margin-bottom", "10px");
-    			add_location(div3, file$4, 12, 0, 303);
+    			add_location(div3, file$4, 11, 0, 265);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div3, anchor);
@@ -17822,11 +17825,11 @@ var app = (function () {
     			append_dev(div1, p);
     			append_dev(p, t4);
     			append_dev(div1, t5);
-    			append_dev(div1, button);
-    			append_dev(button, t6);
+    			append_dev(div1, a);
+    			append_dev(a, t6);
 
     			if (!mounted) {
-    				dispose = listen_dev(button, "click", /*redirect*/ ctx[1], false, false, false);
+    				dispose = listen_dev(a, "click", /*redirect*/ ctx[1], false, false, false);
     				mounted = true;
     			}
     		},
@@ -17846,6 +17849,10 @@ var app = (function () {
 
     			if (dirty & /*link*/ 1 && t1_value !== (t1_value = /*link*/ ctx[0].title + "")) set_data_dev(t1, t1_value);
     			if (dirty & /*link*/ 1 && t4_value !== (t4_value = /*link*/ ctx[0].description + "")) set_data_dev(t4, t4_value);
+
+    			if (dirty & /*link*/ 1 && a_href_value !== (a_href_value = /*link*/ ctx[0].url)) {
+    				attr_dev(a, "href", a_href_value);
+    			}
     		},
     		i: noop,
     		o: noop,
@@ -17876,7 +17883,6 @@ var app = (function () {
 
     	const redirect = async () => {
     		await axios.post("/api/user/clickadd", { instagram: name, _id: link._id }).then(res => console.log("done"));
-    		window.open(link.url, "_blank");
     	};
 
     	const writable_props = ["link", "name"];

@@ -6,7 +6,6 @@
     await axios
       .post("/api/user/clickadd", { instagram: name, _id: link._id })
       .then((res) => console.log("done"));
-    window.open(link.url, "_blank");
   };
 </script>
 
@@ -23,7 +22,12 @@
       <p class="card-text">
         {link.description}
       </p>
-      <button on:click={redirect} class="btn btn-primary">Click Here</button>
+      <a
+        on:click={redirect}
+        href={link.url}
+        target="_blank"
+        class="btn btn-primary">Visit</a
+      >
     </div>
   </div>
 </div>
