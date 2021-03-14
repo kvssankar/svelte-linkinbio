@@ -40,6 +40,12 @@
         return response.json();
       })
       .then(function (data) {
+        console.log(data);
+        if (data.status && data.status == 1) {
+          status = 1;
+          mssg = data.mssg;
+          return;
+        }
         userStore.update((currUser) => {
           return { token: data.token, user: data.user };
         });

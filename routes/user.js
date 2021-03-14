@@ -40,10 +40,10 @@ router.post("/login", async (req, res) => {
   const { instagram, password } = req.body;
   const userExist = await User.findOne({ instagram: instagram });
   if (!userExist)
-    return res.status(400).json({ status: 1, mssg: "User does not exists" });
+    return res.status(500).json({ status: 1, mssg: "User does not exists" });
   const validPassword = await bc.compare(password, userExist.password);
   if (!validPassword)
-    return res.status(400).json({ status: 1, mssg: "Password does not match" });
+    return res.status(500).json({ status: 1, mssg: "Password does not match" });
   const token = jwt.sign({ _id: userExist._id }, config.jwt_secret);
   return res.json({ token, user: userExist });
 });
