@@ -4,8 +4,6 @@ const config = require("./config");
 const app = express();
 const mongoose = require("mongoose");
 
-app.use(cors(corsOptions));
-
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
@@ -26,5 +24,5 @@ app.get("*", (req, res) => {
   res.sendFile(path.resolve(__dirname, "public", "index.html"));
 });
 
-const port =process.env.PORT ||  3000;
+const port = process.env.PORT || 3000;
 app.listen(port, () => console.log(`Listening on port ${port}`));
