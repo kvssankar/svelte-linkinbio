@@ -6,9 +6,14 @@
   import Footer from "../components/Footer.svelte";
   import { deletelink } from "../actions/User.js";
   let user = {};
+  let clicks = 0;
   const unsubscribe = userStore.subscribe((data) => {
     console.log(data);
     user = data.user;
+    if (user.links)
+      for (var i = 0; i < user.links.length; i++) {
+        clicks = clicks + user.links[i].clicks;
+      }
   });
   let status = -1;
   let mssg = "";
@@ -27,6 +32,20 @@
     });
     document.location.href = "/editlink";
   };
+  function myFunction() {
+    var copyText = document.getElementById("myInput");
+    copyText.select();
+    copyText.setSelectionRange(0, 99999);
+    document.execCommand("copy");
+
+    var tooltip = document.getElementById("myTooltip");
+    tooltip.innerHTML = "Copied: " + copyText.value;
+  }
+
+  function outFunc() {
+    var tooltip = document.getElementById("myTooltip");
+    tooltip.innerHTML = "Copy to clipboard";
+  }
 </script>
 
 <div class="main">
@@ -115,6 +134,14 @@
                   </div>
                 {/if}
                 <hr />
+              {:else}
+                <div
+                  style="display:flex;flex-direction:column;justify-content:center;align-items:center"
+                >
+                  <img alt="" src="img/upload.png" width="300px" />
+                  <h1>Upload your first link</h1>
+                  <a href="/addlink" class="btn btn-primary">Add Link</a>
+                </div>
               {/each}
             </div>
           </div>
@@ -131,6 +158,16 @@
                 height="128"
               />
               <h4 class="card-title mb-0">{user.instagram}</h4>
+
+              <input type="text" value={`https://lnkinbio.herokuapp.com/${user.instagram}`} id="myInput"  style="border:none;width:100%;text-align:center;margin:5px;pointer-events:none;"/>
+              <div class="tooltip">
+                <button class="btn btn-sm btn-success" on:click={myFunction} on:mouseout="{outFunc}">
+                  <span class="tooltiptext" id="myTooltip"
+                    >Copy to clipboard</span
+                  >
+                  Copy text
+                </button>
+              </div>
               <div class="text-muted mb-2">
                 Links Uploaded : {user.total_links || 0}
               </div>
@@ -156,7 +193,11 @@
             <div class="card-header">
               <div class="card-actions float-right">
                 <div class="dropdown show">
-                  <a href="/dashboard" data-toggle="dropdown" data-display="static">
+                  <a
+                    href="/dashboard"
+                    data-toggle="dropdown"
+                    data-display="static"
+                  >
                     <i class="align-middle" data-feather="more-horizontal" />
                   </a>
 
@@ -171,7 +212,7 @@
               <div class="media">
                 <div class="media-body">
                   <p class="my-1"><strong>Total number of visits</strong></p>
-                  <p class="text-info">1234</p>
+                  <p class="text-info">{user.views}</p>
                 </div>
               </div>
 
@@ -180,18 +221,18 @@
               <div class="media">
                 <div class="media-body">
                   <p class="my-1"><strong>Total number of clicks</strong></p>
-                  <p class="text-warning">3445</p>
+                  <p class="text-warning">{clicks}</p>
                 </div>
               </div>
 
               <hr class="my-2" />
 
-              <div class="media">
+              <!-- <div class="media">
                 <div class="media-body">
                   <p class="my-1"><strong>Total number of likes</strong></p>
                   <p class="text-danger">456</p>
                 </div>
-              </div>
+              </div> -->
             </div>
           </div>
         </div>
@@ -202,7 +243,42 @@
   <Footer />
 </div>
 
-//TODO : MAKE LINK ADD FORM paGE //TODO : MAKE update link page //TODO : MAKE
-UPDATE PROFILE paGE //TODO : MAKE CLICKS LIKES FUNCTIONAL //TODO : MAKE
-ANALYTICS PAGE //TODO : MAKE SHOW PAGE //TODO : MAKE /sankar URLS paGE //TODO :
-MAKE help and privacy page //TODO: REMOVE LINKS AFTER EVERY WEEK
+<style>
+  .tooltip {
+    position: relative;
+    display: inline-block;
+    opacity:1
+  }
+
+  .tooltip .tooltiptext {
+    visibility: hidden;
+    width: 140px;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px;
+    position: absolute;
+    z-index: 1;
+    bottom: 150%;
+    left: 50%;
+    margin-left: -75px;
+    transition: opacity 0.3s;
+  }
+
+  .tooltip .tooltiptext::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #555 transparent transparent transparent;
+  }
+
+  .tooltip:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+  }
+</style>

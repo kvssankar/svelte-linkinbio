@@ -21,6 +21,7 @@
   function getPhoto(a) {
     loading = true;
     dp = generator.generateRandomAvatar();
+    user.dp = dp;
     loading = false;
   }
   let status = -1;

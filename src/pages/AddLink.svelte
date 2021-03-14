@@ -73,16 +73,6 @@
                   </div>
                   <form on:submit={dispatch}>
                     <div class="form-group">
-                      <label for="">Url</label>
-                      <input
-                        class="form-control form-control-lg"
-                        type="text"
-                        bind:value={link.url}
-                        required
-                        placeholder="https://itesmesankar.herokuapp.com/"
-                      />
-                    </div>
-                    <div class="form-group">
                       <label for="">Title</label>
                       <input
                         class="form-control form-control-lg"
@@ -93,21 +83,30 @@
                       />
                     </div>
                     <div class="form-group">
+                      <label for="">Url</label>
+                      <input
+                        class="form-control form-control-lg"
+                        type="text"
+                        bind:value={link.url}
+                        required
+                        placeholder="https://itesmesankar.herokuapp.com/"
+                      />
+                    </div>
+                    <div class="form-group">
+                      <label for="">Description</label>
+                      <textarea
+                        class="form-control form-control-lg"
+                        bind:value={link.description}
+                        placeholder="Its takes you to the portfolio of mine"
+                      />
+                    </div>
+                    <div class="form-group">
                       <label for="">Upload any image (if required)</label>
                       <input
                         id="file"
                         name="file"
                         type="file"
                         on:change={drop}
-                      />
-                    </div>
-                    <div class="form-group">
-                      <label for="">Description</label>
-                      <input
-                        class="form-control form-control-lg"
-                        type="text"
-                        bind:value={link.description}
-                        placeholder="Its takes you to the protfoliuo of mine"
                       />
                     </div>
                     <div class="text-center mt-3">

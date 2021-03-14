@@ -1,5 +1,13 @@
 <script>
   export let link;
+  export let name;
+  import axios from "axios";
+  const redirect = async () => {
+    await axios
+      .post("/api/user/clickadd", { instagram: name, _id: link._id })
+      .then((res) => console.log("done"));
+    window.open(link.url, "_blank");
+  };
 </script>
 
 <div class="col-12 col-md-6 col-lg-4" style="margin-bottom:10px">
@@ -10,12 +18,12 @@
     <div class="card-header">
       <h5 class="card-title mb-0">{link.title}</h5>
     </div>
-    <hr class="mb-0">
+    <hr class="mb-0" />
     <div class="card-body">
       <p class="card-text">
         {link.description}
       </p>
-      <a href={link.url} class="btn btn-primary">Click Here</a>
+      <button on:click={redirect} class="btn btn-primary">Click Here</button>
     </div>
   </div>
 </div>

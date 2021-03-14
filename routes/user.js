@@ -173,4 +173,25 @@ router.post("/check", async (req, res) => {
   return res.json({ status: 0, mssg: "Successfully updated" });
 });
 
+router.post("/viewadd", async (req, res) => {
+  const { instagram } = req.body;
+  await User.findOneAndUpdate({ instagram }, { $inc: { views: 1 } });
+  res.json({ yes: 1 });
+});
+
+router.post("/clickadd", async (req, res) => {
+  const { instagram, _id } = req.body;
+  await User.findOneAndUpdate(
+    { instagram, "links._id": _id },
+    { $inc: { "links.$.clicks": 1 } }
+  );
+  res.json({ yes: 1 });
+});
+
+router.post("/viewadd", async (req, res) => {
+  const { instagram } = req.body;
+  await User.findOneAndUpdate({ instagram }, { $inc: { views: 1 } });
+  res.json({ yes: 1 });
+});
+
 module.exports = router;
