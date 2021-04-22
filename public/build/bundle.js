@@ -17680,11 +17680,18 @@ var app = (function () {
     			this.h();
     		},
     		l: function claim(nodes) {
-    			img = claim_element(nodes, "IMG", { class: true, src: true, alt: true });
+    			img = claim_element(nodes, "IMG", {
+    				class: true,
+    				style: true,
+    				src: true,
+    				alt: true
+    			});
+
     			this.h();
     		},
     		h: function hydrate() {
     			attr_dev(img, "class", "card-img-top");
+    			set_style(img, "max-height", "250px");
     			if (img.src !== (img_src_value = /*link*/ ctx[0].image)) attr_dev(img, "src", img_src_value);
     			attr_dev(img, "alt", "Not available");
     			add_location(img, file$4, 14, 6, 423);
@@ -17726,7 +17733,7 @@ var app = (function () {
     	let t3;
     	let div1;
     	let p;
-    	let t4_value = /*link*/ ctx[0].description + "";
+    	let t4_value = /*link*/ ctx[0].description.substr(0, 100) + "..." + "";
     	let t4;
     	let t5;
     	let a;
@@ -17753,7 +17760,7 @@ var app = (function () {
     			t4 = text(t4_value);
     			t5 = space();
     			a = element("a");
-    			t6 = text("Click Here");
+    			t6 = text("Visit");
     			this.h();
     		},
     		l: function claim(nodes) {
@@ -17782,7 +17789,7 @@ var app = (function () {
     			t5 = claim_space(div1_nodes);
     			a = claim_element(div1_nodes, "A", { href: true, target: true, class: true });
     			var a_nodes = children(a);
-    			t6 = claim_text(a_nodes, "Click Here");
+    			t6 = claim_text(a_nodes, "Visit");
     			a_nodes.forEach(detach_dev);
     			div1_nodes.forEach(detach_dev);
     			div2_nodes.forEach(detach_dev);
@@ -17791,19 +17798,19 @@ var app = (function () {
     		},
     		h: function hydrate() {
     			attr_dev(h5, "class", "card-title mb-0");
-    			add_location(h5, file$4, 17, 6, 538);
+    			add_location(h5, file$4, 22, 6, 608);
     			attr_dev(div0, "class", "card-header");
-    			add_location(div0, file$4, 16, 4, 505);
+    			add_location(div0, file$4, 21, 4, 575);
     			attr_dev(hr, "class", "mb-0");
-    			add_location(hr, file$4, 19, 4, 601);
+    			add_location(hr, file$4, 24, 4, 671);
     			attr_dev(p, "class", "card-text");
-    			add_location(p, file$4, 21, 6, 657);
+    			add_location(p, file$4, 26, 6, 727);
     			attr_dev(a, "href", a_href_value = /*link*/ ctx[0].url);
     			attr_dev(a, "target", "_blank");
     			attr_dev(a, "class", "btn btn-primary");
-    			add_location(a, file$4, 24, 6, 726);
+    			add_location(a, file$4, 29, 6, 819);
     			attr_dev(div1, "class", "card-body");
-    			add_location(div1, file$4, 20, 4, 626);
+    			add_location(div1, file$4, 25, 4, 696);
     			attr_dev(div2, "class", "card sankarcard");
     			add_location(div2, file$4, 12, 2, 334);
     			attr_dev(div3, "class", "col-12 col-md-6 col-lg-4");
@@ -17848,7 +17855,7 @@ var app = (function () {
     			}
 
     			if (dirty & /*link*/ 1 && t1_value !== (t1_value = /*link*/ ctx[0].title + "")) set_data_dev(t1, t1_value);
-    			if (dirty & /*link*/ 1 && t4_value !== (t4_value = /*link*/ ctx[0].description + "")) set_data_dev(t4, t4_value);
+    			if (dirty & /*link*/ 1 && t4_value !== (t4_value = /*link*/ ctx[0].description.substr(0, 100) + "..." + "")) set_data_dev(t4, t4_value);
 
     			if (dirty & /*link*/ 1 && a_href_value !== (a_href_value = /*link*/ ctx[0].url)) {
     				attr_dev(a, "href", a_href_value);

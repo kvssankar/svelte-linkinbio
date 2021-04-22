@@ -12,7 +12,12 @@
 <div class="col-12 col-md-6 col-lg-4" style="margin-bottom:10px">
   <div class="card sankarcard">
     {#if link.image !== null && link.image !== ""}
-      <img class="card-img-top" src={link.image} alt="Not available" />
+      <img
+        class="card-img-top"
+        style="max-height: 250px;"
+        src={link.image}
+        alt="Not available"
+      />
     {/if}
     <div class="card-header">
       <h5 class="card-title mb-0">{link.title}</h5>
@@ -20,7 +25,7 @@
     <hr class="mb-0" />
     <div class="card-body">
       <p class="card-text">
-        {link.description}
+        {link.description.substr(0, 100) + "..."}
       </p>
       <a
         on:click={redirect}
