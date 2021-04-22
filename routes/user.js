@@ -19,6 +19,10 @@ router.post("/register", async (req, res) => {
   if (userExist) {
     return res.status(500).json({ status: 1, mssg: "User already exists" });
   }
+  const emailExist = await User.findOne({ email: email });
+  if (emailExist) {
+    return res.status(500).json({ status: 1, mssg: "Email already exists" });
+  }
   const newUser = new User({
     password: hashed,
     instagram,
@@ -133,7 +137,7 @@ router.post("/resetpassword", async (req, res) => {
   let user = await User.findOne({ email: req.body.email });
   if (!user) return res.json({ status: 1, mssg: "Email not found" });
   user = await User.findOneAndUpdate(
-    { email: email },
+    { email: req.body.email },
     { resetpassword: password },
     { new: true }
   );
