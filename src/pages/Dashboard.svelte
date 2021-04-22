@@ -7,8 +7,8 @@
   import { deletelink } from "../actions/User.js";
   let user = {};
   let clicks = 0;
-  const unsubscribe = userStore.subscribe((data) => {
-    console.log(data);
+  const unsubscribe = userStore.subscribe(async (data) => {
+    await getinfo();
     user = data.user;
     if (user.links)
       for (var i = 0; i < user.links.length; i++) {
@@ -159,9 +159,18 @@
               />
               <h4 class="card-title mb-0">{user.instagram}</h4>
 
-              <input type="text" value={`https://lnkinbio.herokuapp.com/${user.instagram}`} id="myInput"  style="border:none;width:100%;text-align:center;margin:5px;pointer-events:none;"/>
+              <input
+                type="text"
+                value={`https://lnkinbio.herokuapp.com/${user.instagram}`}
+                id="myInput"
+                style="border:none;width:100%;text-align:center;margin:5px;pointer-events:none;"
+              />
               <div class="tooltip">
-                <button class="btn btn-sm btn-success" on:click={myFunction} on:mouseout="{outFunc}">
+                <button
+                  class="btn btn-sm btn-success"
+                  on:click={myFunction}
+                  on:mouseout={outFunc}
+                >
                   <span class="tooltiptext" id="myTooltip"
                     >Copy to clipboard</span
                   >
@@ -247,7 +256,7 @@
   .tooltip {
     position: relative;
     display: inline-block;
-    opacity:1
+    opacity: 1;
   }
 
   .tooltip .tooltiptext {
