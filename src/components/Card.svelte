@@ -9,7 +9,7 @@
   };
 </script>
 
-<div class="col-12 col-md-6 col-lg-4" style="margin-bottom:10px">
+<div style="margin:10px;max-width: 400px;">
   <div class="card sankarcard">
     {#if link.image !== null && link.image !== ""}
       <img

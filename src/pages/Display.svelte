@@ -51,7 +51,7 @@
           </div>
         </div>
       </div>
-      <div class="row">
+      <div class="row" style="justify-content: center;">
         {#each links as link}
           <Card {link} {name} />
         {/each}
