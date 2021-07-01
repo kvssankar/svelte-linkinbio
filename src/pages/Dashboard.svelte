@@ -4,17 +4,22 @@
   import { userStore } from "../store/User.js";
   import NavBar from "../components/Navbar.svelte";
   import Footer from "../components/Footer.svelte";
-  import { deletelink } from "../actions/User.js";
+  import { deletelink, getinfo } from "../actions/User.js";
+  import { onDestroy, onMount } from "svelte";
   let user = {};
   let clicks = 0;
+  onMount(() => {
+    getinfo();
+  });
   const unsubscribe = userStore.subscribe(async (data) => {
-    await getinfo();
+    console.log(user);
     user = data.user;
     if (user.links)
       for (var i = 0; i < user.links.length; i++) {
         clicks = clicks + user.links[i].clicks;
       }
   });
+  onDestroy(unsubscribe);
   let status = -1;
   let mssg = "";
   const deleteLink = async (a) => {

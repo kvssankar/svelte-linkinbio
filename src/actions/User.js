@@ -54,7 +54,7 @@ export const getinfo = async () => {
   await axios.get("/api/user/info", config).then((res) =>
     userStore.update((currUser) => {
       console.log("updated");
-      return { token: currUser.token, user: res.data };
+      return { ...currUser, token: currUser.token, user: res.data };
     })
   );
 };

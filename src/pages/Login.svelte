@@ -5,8 +5,7 @@
   import Footer from "../components/Footer.svelte";
   import Alert from "../components/Alert.svelte";
   import { userStore } from "../store/User.js";
-  import { AvatarGenerator } from "random-avatar-generator";
-  const generator = new AvatarGenerator();
+  import { displayuser } from "../actions/User";
 
   let user = {
     password: "",
@@ -14,9 +13,11 @@
   };
   let dp = "img/avatars/avatar.jpg";
   let loading = false;
-  function getPhoto(a) {
+  async function getPhoto(a) {
     loading = true;
-    dp = generator.generateRandomAvatar();
+    let u = await displayuser(user.instagram);
+    console.log(u);
+    if (u) dp = u.dp;
     loading = false;
   }
   let status = -1;
